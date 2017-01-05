@@ -3,6 +3,7 @@ package com.sulitous.biti.popularmovies;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,13 +25,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterOnClickHandler{
+public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterOnClickHandler, FetchMoviesTask.onTaskProcess{
 
     RecyclerView mRecycle;
     MoviesAdapter mAdapter;
     private TextView mErrorDisplay;
     private ProgressBar mProgress;
     private ActionBar mActionBar;
+    private GridLayoutManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,12 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
         mAdapter = new MoviesAdapter(this, this);
 
-        GridLayoutManager manager = new GridLayoutManager(this,2);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            manager = new GridLayoutManager(this,2);
+        }
+        else{
+            manager = new GridLayoutManager(this,4);
+        }
         mRecycle.setLayoutManager(manager);
         mRecycle.setHasFixedSize(true);
         mRecycle.setAdapter(mAdapter);
@@ -96,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
     private void loadMoviesData(String type){
         showMovieDataView();
-        new FetchMoviesTask().execute(type);
+        new FetchMoviesTask(this).execute(type);
     }
 
     private void showMovieDataView(){
@@ -104,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         mRecycle.setVisibility(View.VISIBLE);
     }
 
-    private void showErrorMessage() {
+    public void showErrorMessage() {
         mRecycle.setVisibility(View.INVISIBLE);
         mErrorDisplay.setVisibility(View.VISIBLE);
     }
@@ -124,41 +131,19 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         startActivity(intent);
     }
 
-    public class FetchMoviesTask extends AsyncTask<String,Void,List<Movies>>{
+    @Override
+    public void onPre() {
+        mProgress.setVisibility(View.VISIBLE);
+    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mProgress.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected List<Movies> doInBackground(String... strings) {
-            if (strings.length == 0) {
-                return null;
-            }
-
-            String query =strings[0];
-            URL movieRequestUrl = NetworkUtils.buildUrl(query);
-
-            try {
-                String jsonMovieResponse = NetworkUtils.getResponseFromHttpUrl(movieRequestUrl);
-
-                return OpenMovieJsonUtils.getSimpleMoviesDetailsFromJson(jsonMovieResponse);
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(List<Movies> movies) {
-            mProgress.setVisibility(View.INVISIBLE);
-            if (movies != null){
-                mAdapter.setMoviesData(movies);
-            }else {
-                showErrorMessage();
-            }
+    @Override
+    public void onCompleted(List<Movies> movies) {
+        mProgress.setVisibility(View.INVISIBLE);
+        if (movies != null){
+            mAdapter.setMoviesData(movies);
+        }else {
+            showErrorMessage();
         }
     }
+
 }
