@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="error_message">Error getting data</string>
+    <string name="pref_units_label">Order by</string>
+    <string name="pref_units_key">order</string>
+    <string name="pref_units_default">popular</string>
+    <string name="action_settings">Setting</string>
+    <string name="title_activity_setting">Setting</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+
+    <string name="title_activity_movies">MoviesActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="back_drop">backdrop_image</string>
+    <string name="image_title">Image_Title</string>
+    <string name="adult">Adult</string>
+    <string name="not_adult">Not Adult</string>
+    <string name="share">Share</string>
+</resources>
