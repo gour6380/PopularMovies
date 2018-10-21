@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+//utils
 import com.sulitous.biti.popularmovies.utilities.NetworkUtils;
 import com.sulitous.biti.popularmovies.utilities.OpenMovieJsonUtils;
 
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         mRecycle.setVisibility(View.INVISIBLE);
         mErrorDisplay.setVisibility(View.VISIBLE);
     }
-
+//onclick
     @Override
     public void onClick(Movies movies) {
         Intent intent = new Intent(MainActivity.this, MovieActivity.class);
