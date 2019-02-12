@@ -23,73 +23,70 @@
             android:layout_marginTop="16dp"/>
 
         <ImageView
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:src="@drawable/log"
-            android:id="@+id/backDrop_image"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/back_drop"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="0dp"
+            android:contentDescription="@string/image_title"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            android:id="@+id/backDrop_image" />
 
         <ImageView
-            android:layout_width="128dp"
             tools:src="@drawable/title"
             android:id="@+id/title_image"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/backDrop_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="128dp"
             android:adjustViewBounds="true"
+            app:layout_constraintTop_toBottomOf="@+id/backDrop_image"
+            android:layout_marginTop="16dp"
             android:scaleType="fitCenter"
             android:contentDescription="@string/image_title"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_height="128dp" />
 
         <TextView
-            tools:text="Rogue One: A Star Wars"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/movie_title"
-            app:layout_constraintLeft_toRightOf="@+id/title_image"
             app:layout_constraintTop_toTopOf="@+id/title_image"
-            android:layout_marginTop="8dp"
-            android:layout_width="0dp"
-            android:textSize="14sp"
-            android:textStyle="normal|bold"
-            android:fontFamily="sans-serif" />
+            app:layout_constraintLeft_toRightOf="@+id/title_image"
+            tools:text="Rogue One: A Star Wars"
+            android:textStyle="normal|bold" />
 
         <RatingBar
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/movie_rating"
-            android:layout_width="wrap_content"
-            android:isIndicator="true"
+            style="@style/Widget.AppCompat.RatingBar.Small"
             android:numStars="@integer/max_star_num"
             android:stepSize="0.5"
-            style="@style/Widget.AppCompat.RatingBar.Small"
             tools:rating="4.5"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/movie_title"
             app:layout_constraintLeft_toRightOf="@+id/title_image" />
 
         <TextView
-            tools:text="2016-14-12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/release_date"
-            app:layout_constraintLeft_toRightOf="@+id/title_image"
-            app:layout_constraintTop_toBottomOf="@+id/movie_rating"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            tools:text="11737 vote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/total_vote_view"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/movie_rating"
             app:layout_constraintTop_toTopOf="@+id/movie_rating"
-            app:layout_constraintLeft_toRightOf="@+id/movie_rating" />
+            app:layout_constraintBottom_toBottomOf="@+id/movie_rating"
+            android:layout_marginStart="16dp"
+            app:layout_constraintLeft_toRightOf="@+id/movie_rating"
+            android:layout_marginLeft="16dp"
+            tools:text="11737 Vote" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/release_date"
+            tools:text="2016-14-12"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/movie_rating"
+            app:layout_constraintLeft_toRightOf="@+id/title_image" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,26 +101,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/movie_adult"
-            app:layout_constraintLeft_toRightOf="@+id/title_image"
-            app:layout_constraintTop_toBottomOf="@+id/movie_language"
+            tools:text="Adult"
             android:layout_marginTop="8dp"
-            tools:text="adult" />
+            app:layout_constraintTop_toBottomOf="@+id/movie_language"
+            app:layout_constraintLeft_toRightOf="@+id/title_image" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/movie_overview"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/title_image"
+            android:layout_marginStart="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="16dp"
-            tools:text="Overview"
             android:layout_marginEnd="16dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginRight="16dp"
-            android:textAlignment="viewStart"
-            android:gravity="start"/>
+            tools:text="Overview" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_videos"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="16dp"
+            android:layout_width="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/movie_overview"
+            android:layout_marginTop="16dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_reviews"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_videos"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_width="0dp" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

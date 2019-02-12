@@ -1,6 +1,7 @@
 package com.sulitous.biti.popularmovies.utilities;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +21,32 @@ public class NetworkUtils {
 
     public static URL buildUrl(String movieQuery){
         String urlString = BASE_URL+movieQuery+"?api_key="+API_KEY;
+        Uri uri = Uri.parse(urlString);
+
+        URL url = null;
+        try {
+            url = new URL(uri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static URL buildVideoURL(int id){
+        String urlString = BASE_URL+id+"videos"+"?api_key="+API_KEY;
+        Uri uri = Uri.parse(urlString);
+
+        URL url = null;
+        try {
+            url = new URL(uri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static URL buildReviewsURL(int id){
+        String urlString = BASE_URL+id+"reviews"+"?api_key="+API_KEY;
         Uri uri = Uri.parse(urlString);
 
         URL url = null;

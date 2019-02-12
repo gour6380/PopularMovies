@@ -17,4 +17,5 @@
     <string name="adult">Adult</string>
     <string name="not_adult">Not Adult</string>
     <string name="share">Share</string>
+    <string name="play">Play Trailer</string>
 </resources>

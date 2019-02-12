@@ -14,6 +14,7 @@ public class Movies implements Parcelable {
     private boolean adult;
     private String voteAverage;
     private int voteCount;
+    private int movieId;
 
     public Movies() {
     }
@@ -28,6 +29,7 @@ public class Movies implements Parcelable {
         adult = Boolean.valueOf(parcel.readString());
         voteAverage = parcel.readString();
         voteCount = parcel.readInt();
+        movieId = parcel.readInt();
     }
 
     String getPosterImage() {
@@ -102,6 +104,14 @@ public class Movies implements Parcelable {
         this.voteCount = voteCount;
     }
 
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -118,6 +128,7 @@ public class Movies implements Parcelable {
         parcel.writeString(String.valueOf(adult));
         parcel.writeString(voteAverage);
         parcel.writeInt(voteCount);
+        parcel.writeInt(movieId);
     }
 
     public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>(){

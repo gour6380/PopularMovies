@@ -25,7 +25,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterOnClickHandler, FetchMoviesTask.onTaskProcess{
+public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterOnClickHandler,
+        FetchMoviesTask.onTaskProcess{
 
     RecyclerView mRecycle;
     MoviesAdapter mAdapter;
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         intent.putExtra("VOTEAVERAGE",movies.getVoteAverage());
         intent.putExtra("BACKDROP",movies.getBackDropImage());
         intent.putExtra("VOTECOUNT",movies.getVoteCount());
+        intent.putExtra("MOVIEID",movies.getMovieId());
         startActivity(intent);
     }
 
